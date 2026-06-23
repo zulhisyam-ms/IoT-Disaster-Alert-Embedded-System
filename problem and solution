@@ -1,0 +1,73 @@
+Problem and Solution
+
+
+
+
+3D printing of car chassis
+Problem: 
+- The 3D printer encountered difficulties in producing the car chassis to the exact specifications required. 
+There are some parts that didn't have a balanced volume from one point to another even though our design in AutoCAD software is perfectly fine. 
+This is due to the machine failure. For the hole on the printed 3D chassis, it can't properly make a hole that can perfectly fit screw inside of it. 
+So it is hard for our team to constructed our robot.
+Solution: 
+- Following consultation with a lecturer, the decision was made to outsource the printing of the 3D robot body structure to a specialized facility. 
+This approach leverages external expertise and resources to ensure the precision and quality needed for the chassis. 
+We managed to find another shop outside which offered a lower price that can print our body chassis and managed to get a balanced volume of our body chassis. 
+Surprisingly, our hole on the new 3D printed chassis body is perfectly fit to insert screw on it which is the main function of the screw itself to connect one component to another. 
+We managed to get our body chassis as intended with the size and the width of the body chassis is also in medium ratio which offers not too heavy that can reduce robot's speed and not too light that can imbalance our robot to move or stand.
+
+
+DC motor polarity
+Problem: 
+- The DC motor exhibits reverse rotation, which can be attributed to its internal construction. 
+When we already switched the polarity, then another problem will occur which is the direction of the robot being switched if we changed the polarity of the motor. 
+Sometimes it is not about the dc motor problem, sometimes it is due to coding or even the connection problem. 
+At one point, the dc motor won't move accordingly while moving forward, with only one motor being moved, the other won't move.
+Solution: 
+- Refer to DC Motor Datasheets Thoroughly examine the datasheets provided by the manufacturer to gain insight into the motor's specifications, wiring diagrams, and recommended usage. 
+This step helps in understanding the motor's design and identifying any potential issues related to its internal configuration. 
+We noticed that for the motor to move, we need enough power to dc motor to make it move according to the direction that we want. 
+We have set the pWM value into 150 which middle of it's value which the robot will move not very fast and at the same time, we don't want it to move very slowly. 
+This is because we need the robot to move as slowly as it can, because we want the robot to have enough time to detect the distance. 
+This is due the sensor that we buy couldn't detect the distance immediately, which it would have a little delay to send an information to the serial monitor. 
+Noted that pWM value range is between 0-255, if we choose below than 150, the motor will not move at some point, and it will move if we choose 150 as the pWm value.
+
+Servo motor 
+Problem: 
+- The robot requires the ability to detect price rotations and navigate around obstacles in its surroundings. 
+There are a few cases involved in this area, in which we have declared 3 different cases, which are in front, right and left when there is an obstacle.
+Solution: Implement Servo Motor: 
+- Integrate a servo motor into the robot's design to enable precise control of sensors or actuators responsible for detecting price rotations and obstacle avoidance. 
+The servo motor offers fine-grained angular control, making it suitable for orienting sensors in different directions or adjusting the robot's movement in response to detected obstacles. 
+We also could declare Servo Motor Usage in Code: Within the coding section of the robot's software, explicitly define the functionality and usage of the servo motor. This includes initializing the servo motor, specifying its control parameters such as range and speed, and assigning it tasks related to price rotation detection and obstacle navigation. If there is an obstacle in front of the robot then, the servo value that can be declared inside the coding is 47, which will move the robot 47 degrees from its original position. Similarly, for left and right rotation, the value for left rotation is 150 while right rotation is 10 which both of this direction will turn the robot accordingly from it's own original position
+
+Coding debugging
+Problem: 
+- As software testing progressed, a few errors in the code were found. There are several errors, which are involved in case statements. 
+We actually have 5 case statements which are instructions for the robot to move forward, backward, left, right and stop. 
+However, this 5 case statement will be decided by the obstacle that will measure how close from the robot to the obstacles and decide whether to move forward, backward, left, right or even stop. 
+It seems like the motor didn’t work well as intended due to the wrong declaration inside the coding section in assigning which tyre will move front or back according to the 5 different case statement inside the coding section. 
+Solution: 
+- Have a clear understanding of the project requirements before starting coding. Break down complex tasks into smaller, manageable steps. 
+Test the code in small increments rather than waiting until the entire project is complete. Fix issues as soon as they arise to prevent them from accumulating. 
+For the 5 different case statements, we have identified which motor will move to the front or back because the dc motor only has 2 options: either to move to the front or to the back. 
+In the coding section, There are 4 motor variables that are being used, which are LF, LB, RF, and RB. 
+Those indicated which motor will be used at that particular time according to the case that is being stated inside the coding section. 
+Let’s say there is an obstacle on the left, then it will have a value of active LOW on LF and RB motors which will turn the robot to the right. 
+However, it is not easy because at first we need to identify first which dc motor will be active LOW according to the coding statement that will move the robot 
+accordingly but we managed to identify those motor polarities and make the robot avoid obstacles away from it. 
+
+Battery usage
+Problem: 
+- The voltage usage of the battery 1.5v during robot testing was not enough to provide for the robot. 
+This is due the battery that needed to move the robot consumes a lot of power. 
+The reason why we need a higher battery is because the servo motor that will move the robot needs extra power because of its functionality. 
+Also, arduino UNO also consume a lot of power because it’s being used to process the data that being sent from IR sensor need to be process first, 
+cause we know that the data that will be receive is in analog form then it will sent a signal to the servo motor to move according to the function statement that being declared inside coding statement. 
+Solution: 
+- We have changed the battery and used 2 packs of 3.7 lipo batteries for better performance. 
+From the previous method, we used 4 x AA which are not compatible enough. As we know that AA batteries supply a lower voltage power inside the arduino, 
+which is around 1.4 V for every battery. It only supplies 4.8V in total because the arrangement of the batteries is in series form. 
+So, the value will be added and only supply 4.8 V in total and did not supply enough power to the arduino UNO. 
+It is true that if we used 2 packs of 18650 batteries that supply 7.4 V batteries might not bet good in terms of the cost because 1 battery is very costly but note that the battery is rechargeable, so we can charge the battery if it's under power.
+
